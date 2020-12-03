@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import './App.css'
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
+import SearchBar from './layout/SearchBar'
+import LogList from './log/LogList'
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    M.AutoInit()
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h2>Roommate App</h2>
+      <SearchBar />
+      <div className='container'>
+        <LogList />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
