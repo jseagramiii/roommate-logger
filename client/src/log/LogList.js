@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import LogItem from './LogItem'
+import Loader from '../layout/Loader'
 
 const LogList = () => {
   const [logList, setLogList] = useState([])
   const [loading, setLoading] = useState(false)
 
-  //  useEffect(() => {
-  //    setLoading(true)
+  useEffect(() => {
+    setLoading(true)
 
-  //    const getLogList = async () => {
-  //      setLoading(true)
+    const getLogList = async () => {
+      setLoading(true)
 
-  //      const res = await axios.get('/loglist')
+      const res = await axios.get('http://localhost:5000/api/log')
 
-  //      setLogList(res.data)
-  //      setLoading(false)
-  //    }
-  //    getLogList()
-  //  }, [])
+      setLoading(false)
+      setLogList(res.data)
+    }
+    getLogList() // eslint-disable-next-line
+  }, [])
 
   if (loading) {
-    return <h3>Loading</h3>
+    return { Loader }
   }
 
   return (
@@ -34,7 +35,7 @@ const LogList = () => {
           <em>No activity</em>
         </p>
       ) : (
-        <LogItem />
+        logList.map((log) => <LogItem log={log} key={log.id} />)
       )}
     </ul>
   )
