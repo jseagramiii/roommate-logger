@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
+import LogContext from '../context/log/logContext'
 import LogItem from './LogItem'
 import Loader from '../layout/Loader'
 
 const LogList = () => {
-  const [logList, setLogList] = useState([])
-  const [loading, setLoading] = useState(false)
+  //  const [logList, setLogList] = useState([])
+  //  const [loading, setLoading] = useState(false)
+  const logContext = useContext(LogContext)
+  const { logs } = logContext
 
-  useEffect(() => {
-    setLoading(true)
+  //  useEffect(() => {
+  //    setLoading(true)
 
-    const getLogList = async () => {
-      setLoading(true)
+  //    const getLogList = async () => {
+  //      setLoading(true)
 
-      const res = await axios.get('http://localhost:5000/api/log')
+  //      const res = await axios.get('http://localhost:5000/api/log')
 
-      setLoading(false)
-      setLogList(res.data)
-    }
-    getLogList() // eslint-disable-next-line
-  }, [])
+  //      setLoading(false)
+  //      setLogList(res.data)
+  //    }
+  //    getLogList() // eslint-disable-next-line
+  //  }, [])
 
-  if (loading) {
-    return { Loader }
-  }
+  //  if (loading) {
+  //    return { Loader }
+  //  }
 
   return (
     <ul className='collection with-header'>
       <li className='collection-header'>
-        <h4 className='center'>Activity Log</h4>
+        <h4 className='center'>House Feed</h4>
       </li>
-      {!loading && logList.length === 0 ? (
+      {logs.length === 0 ? (
         <p className='center'>
           <em>No activity</em>
         </p>
       ) : (
-        logList.map((log) => <LogItem log={log} key={log.id} />)
+        logs.map((log) => <LogItem log={log} key={log.id} />)
       )}
     </ul>
   )

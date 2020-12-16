@@ -2,22 +2,21 @@ import React from 'react'
 import Moment from 'react-moment'
 
 const LogItem = ({ log }) => {
+  const { name, header, content, category, completed, date } = log
   return (
     <li className='collection-item'>
       <div>
-        <p>activity message</p>
+        <p>{header}</p>
         <a
           href='#edit-log-modal'
-          className={`modal-trigger ${
-            log.completed ? 'blue-text' : 'red-text'
-          }`}
+          className={`modal-trigger ${completed ? 'blue-text' : 'red-text'}`}
         >
-          {log.header}
+          {content}
         </a>
         <br />
         <span className='grey-text'>
-          Created by: <span className='black-text'>{log.name}</span>
-          on <Moment format='MMMM Do YYYY, h:mm:ss a'>{log.date}</Moment>
+          Created by: <span className='black-text'>{name} </span>
+          on <Moment format='MMMM Do YYYY, h:mm:ss a'> {date}</Moment>
         </span>
         <a href='#!' className='secondary-content'>
           <i className='material-icons grey-text'>delete</i>

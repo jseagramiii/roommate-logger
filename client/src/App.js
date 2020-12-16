@@ -3,8 +3,13 @@ import { Router, Link } from '@reach/router'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min'
+import Navbar from './layout/Navbar'
 import SearchBar from './layout/SearchBar'
 import LogList from './log/LogList'
+import LogState from './context/log/LogState'
+import LogForm from './log/LogForm'
+import AddButton from './layout/AddButton'
+import Calendar from './Calendar'
 
 const App = () => {
   useEffect(() => {
@@ -12,13 +17,19 @@ const App = () => {
   })
 
   return (
-    <div className='App'>
-      <h2>House Keeper</h2>
-      <SearchBar />
-      <div className='container'>
-        <LogList />
+    <LogState>
+      <div>
+        <Navbar />
+        {/*<SearchBar />*/}
+        <div className='container'>
+          <Router>
+            <LogList path='/' />
+            <Calendar path='calendar' />
+          </Router>
+          <AddButton />
+        </div>
       </div>
-    </div>
+    </LogState>
   )
 }
 
