@@ -5,9 +5,9 @@ const Navbar = () => {
   return (
     <nav style={{ marginBottom: '4em' }}>
       <div className='nav-wrapper'>
-        <a style={{ paddingLeft: '.5em' }} href='#' className='brand-logo'>
+        <Link style={{ paddingLeft: '.5em' }} to='/' className='brand-logo'>
           House Keeper
-        </a>
+        </Link>
 
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
           <li>

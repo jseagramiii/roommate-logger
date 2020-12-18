@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Router, Link } from '@reach/router'
 import './App.css'
 import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css/dist/js/materialize.min'
+import M from 'materialize-css/dist/js/materialize.min.js'
 import Navbar from './layout/Navbar'
 import SearchBar from './layout/SearchBar'
-import LogList from './log/LogList'
+import LogList from './pages/log/LogList'
 import LogState from './context/log/LogState'
-import LogForm from './log/LogForm'
-import AddButton from './layout/AddButton'
-import Calendar from './Calendar'
+import Calendar from './pages/calendar/Calendar'
+import Expense from './pages/expenses/Expense'
 
 const App = () => {
   useEffect(() => {
@@ -25,8 +24,8 @@ const App = () => {
           <Router>
             <LogList path='/' />
             <Calendar path='calendar' />
+            <Expense path='expenses' />
           </Router>
-          <AddButton />
         </div>
       </div>
     </LogState>

@@ -6,10 +6,10 @@ const LogItem = ({ log }) => {
   return (
     <li className='collection-item'>
       <div>
-        <p>{header}</p>
+        <h5>{header}</h5>
         <a
           href='#edit-log-modal'
-          className={`modal-trigger ${completed ? 'blue-text' : 'red-text'}`}
+          className={`modal-trigger ${completed ? 'green-text' : 'red-text'}`}
         >
           {content}
         </a>

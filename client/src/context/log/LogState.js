@@ -21,18 +21,21 @@ const LogState = (props) => {
         name: 'jimmy',
         header: 'hello guys.  Header',
         content: 'hi hi how ya doing this is state. jimmy Content',
+        completed: true,
       },
       {
         id: 2,
         name: 'emily',
         header: 'hello guys. Emily Header',
         content: 'hi hi how ya doing this is state.  Emil Content',
+        completed: false,
       },
       {
         id: 3,
         name: 'Tony',
         header: 'hello guys. Tony Header',
         content: 'hi hi how ya doing this is state.  Tony Content',
+        completed: true,
       },
     ],
   }

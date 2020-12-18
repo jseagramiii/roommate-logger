@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import LogContext from '../context/log/logContext'
+import LogContext from '../../context/log/logContext'
 import LogItem from './LogItem'
-import Loader from '../layout/Loader'
+import Loader from '../../layout/Loader'
+import AddButton from '../../layout/AddButton'
+import AddLogModal from './AddLogModal'
+import EditLogModal from './EditLogModal'
+import AddNameModal from './AddNameModal'
 
 const LogList = () => {
   //  const [logList, setLogList] = useState([])
@@ -29,18 +33,24 @@ const LogList = () => {
   //  }
 
   return (
-    <ul className='collection with-header'>
-      <li className='collection-header'>
-        <h4 className='center'>House Feed</h4>
-      </li>
-      {logs.length === 0 ? (
-        <p className='center'>
-          <em>No activity</em>
-        </p>
-      ) : (
-        logs.map((log) => <LogItem log={log} key={log.id} />)
-      )}
-    </ul>
+    <div>
+      <ul className='collection with-header'>
+        <li className='collection-header'>
+          <h4 className='center'>House Feed</h4>
+        </li>
+        {logs.length === 0 ? (
+          <p className='center'>
+            <em>No activity</em>
+          </p>
+        ) : (
+          logs.map((log) => <LogItem log={log} key={log.id} />)
+        )}
+      </ul>
+      <AddButton />
+      <AddLogModal />
+      <AddNameModal />
+      <EditLogModal />
+    </div>
   )
 }
 
