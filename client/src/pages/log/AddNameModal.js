@@ -15,7 +15,7 @@ const AddNameModal = () => {
     }
   }
   return (
-    <div id='add-name-modal' className='modal'>
+    <div id='add-name-modal' className='modal' style={{ modalStyle }}>
       <div className='modal-content'>
         <h4>Add House Member</h4>
         <div className='row'>
@@ -56,6 +56,10 @@ const AddNameModal = () => {
       </div>
     </div>
   )
+}
+const modalStyle = {
+  width: '75%',
+  height: '75%',
 }
 
 export default AddNameModal

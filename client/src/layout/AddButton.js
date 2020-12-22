@@ -11,12 +11,18 @@ const AddButton = () => {
       </a>
       <ul>
         <li>
-          <a href='#name-list-modal' className='btn-floating yellow darken-2'>
+          <a
+            href='#name-list-modal'
+            className='btn-floating yellow darken-2 modal-trigger'
+          >
             <i className='material-icons'>person</i>
           </a>
         </li>
         <li>
-          <a href='#add-name-modal' className='btn-floating green darken-1'>
+          <a
+            href='#add-name-modal'
+            className='modal-trigger btn-floating green darken-1'
+          >
             <i className='material-icons'>person_add</i>
           </a>
         </li>
