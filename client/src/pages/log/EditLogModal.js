@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import LogContext from '../../context/log/logContext'
 
 const EditLogModal = () => {
-  const [name, setName] = useState('')
-  const [header, setHeader] = useState('')
-  const [content, setContent] = useState('')
-  const [completed, setCompleted] = useState(false)
+  const logContext = useContext(LogContext)
+
+  const [log, setLog] = useState({
+    name: '',
+    header: '',
+    content: '',
+  })
+
+  const { current, clearCurrent } = logContext
+
+  const { name, header, content, completed } = log
 
   const onSubmit = () => {
     console.log(name, header, content, completed)
@@ -13,12 +21,18 @@ const EditLogModal = () => {
       M.toast({ html: 'Please enter a name and header' })
     } else {
       console.log(name, header, completed)
-      setName('')
-      setHeader('')
-      setContent('')
-      setCompleted(false)
+      setLog({
+        name: '',
+        header: '',
+        content: '',
+      })
     }
   }
+
+  const onChange = (e) => {
+    setLog({ ...log, [e.target.name]: e.target.value })
+  }
+
   return (
     <div id='edit-log-modal' className='modal' style={modalStyle}>
       <div className='modal-content'>
@@ -29,7 +43,7 @@ const EditLogModal = () => {
               type='text'
               name='header'
               value={header}
-              onChange={(e) => setHeader(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor='header' className='active'>
               Log Header
@@ -42,7 +56,7 @@ const EditLogModal = () => {
               type='text'
               name='content'
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor='content' className='active'>
               Details
@@ -55,7 +69,7 @@ const EditLogModal = () => {
               name='name'
               value={name}
               className='browser-default'
-              onChange={(e) => setName(e.target.value)}
+              onChange={onChange}
             >
               <option value='' disabled>
                 Select House Member
@@ -67,7 +81,7 @@ const EditLogModal = () => {
             </select>
           </div>
         </div>
-        <div className='row'>
+        {/*<div className='row'>
           <div className='input-field'>
             <p>
               <label>
@@ -81,7 +95,7 @@ const EditLogModal = () => {
               </label>
             </p>
           </div>
-        </div>
+        </div>*/}
       </div>
       <div className='modal-footer'>
         <a

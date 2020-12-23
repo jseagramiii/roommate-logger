@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import uuid from 'uuid'
+import { v4 as uuid } from 'uuid'
 import logContext from './logContext'
 import logReducer from './logReducer'
 import {
@@ -38,17 +38,30 @@ const LogState = (props) => {
         completed: true,
       },
     ],
+    current: null,
   }
   const [state, dispatch] = useReducer(logReducer, initialState)
 
   // Add log
+  const addLog = (log) => {
+    log.id = Math.floor(Math.random() * 99999)
+    dispatch({ type: ADD_LOG, payload: log })
+  }
 
   // Delete log
+  const deleteLog = (id) => {
+    dispatch({ type: DELETE_LOG, payload: id })
+  }
 
   // Set current log
+  const setCurrent = (log) => {
+    dispatch({ type: SET_CURRENT, payload: log })
+  }
 
   // Clear current log
-
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT })
+  }
   // Update log
 
   // Filter logs
@@ -58,7 +71,12 @@ const LogState = (props) => {
   return (
     <LogContext.Provider
       value={{
+        current: state.current,
         logs: state.logs,
+        addLog,
+        deleteLog,
+        setCurrent,
+        clearCurrent,
       }}
     >
       {props.children}
