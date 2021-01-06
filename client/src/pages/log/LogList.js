@@ -11,10 +11,9 @@ import NameListModal from './NameListModal'
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 const LogList = () => {
-  //  const [logList, setLogList] = useState([])
-  //  const [loading, setLoading] = useState(false)
   const logContext = useContext(LogContext)
-  const { logs } = logContext
+  const { logs, setCurrent, current } = logContext
+
   useEffect(() => {
     M.AutoInit()
     // eslint-disable-next-line
@@ -49,7 +48,9 @@ const LogList = () => {
             <em>No activity</em>
           </p>
         ) : (
-          logs.map((log) => <LogItem log={log} key={log.id} />)
+          logs.map((log) => (
+            <LogItem current={current} log={log} key={log.id} />
+          ))
         )}
       </ul>
       <AddButton />

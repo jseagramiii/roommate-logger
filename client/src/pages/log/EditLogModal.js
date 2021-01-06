@@ -4,14 +4,25 @@ import LogContext from '../../context/log/logContext'
 
 const EditLogModal = () => {
   const logContext = useContext(LogContext)
+  const { current, clearCurrent } = logContext
+
+  useEffect(() => {
+    if (current !== null) {
+      setLog(current)
+    } else {
+      setLog({
+        name: '',
+        header: '',
+        content: '',
+      })
+    }
+  }, [current, logContext])
 
   const [log, setLog] = useState({
     name: '',
     header: '',
     content: '',
   })
-
-  const { current, clearCurrent } = logContext
 
   const { name, header, content, completed } = log
 
@@ -34,7 +45,7 @@ const EditLogModal = () => {
   }
 
   return (
-    <div id='edit-log-modal' className='modal' style={modalStyle}>
+    <div id='edit-log-modal' className='modal'>
       <div className='modal-content'>
         <h4>Enter log for house feed</h4>
         <div className='row'>
@@ -81,7 +92,7 @@ const EditLogModal = () => {
             </select>
           </div>
         </div>
-        {/*<div className='row'>
+        {/* <div className='row'>
           <div className='input-field'>
             <p>
               <label>
@@ -95,7 +106,7 @@ const EditLogModal = () => {
               </label>
             </p>
           </div>
-        </div>*/}
+        </div> */}
       </div>
       <div className='modal-footer'>
         <a
