@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import AlertContext from '../context/alert/alertContext'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 const Login = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
+
+  const alertContext = useContext(AlertContext)
+
+  const { setAlert } = alertContext
 
   const { email, password } = user
 
@@ -14,12 +20,17 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    if (email === '' || password === '') {
+      setAlert(M.toast({ html: 'Please fill out all fields' }))
+    }
     console.log('Login')
   }
 
   return (
     <div>
-      <h3 className='center'>Account Login</h3>
+      <h3 className='center'>
+        Account <span style={{ color: 'tomato' }}>Login</span>
+      </h3>
       <div className='collection center padding-10'>
         <form className='col s12' onSubmit={onSubmit}>
           <div className='row'>
@@ -38,7 +49,7 @@ const Login = () => {
                 <label htmlFor='password'>Password</label>
                 <input
                   onChange={onChange}
-                  type='text'
+                  type='password'
                   value={password}
                   name='password'
                   className='validate'

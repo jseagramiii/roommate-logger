@@ -8,16 +8,20 @@ import AddLogModal from './AddLogModal'
 import EditLogModal from './EditLogModal'
 import AddNameModal from './AddNameModal'
 import NameListModal from './NameListModal'
+import AuthContext from '../../context/auth/authContext'
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 const LogList = () => {
+  const authContext = useContext(AuthContext)
   const logContext = useContext(LogContext)
   const { logs, setCurrent, current } = logContext
+  const { loadUser } = authContext
 
   useEffect(() => {
     M.AutoInit()
+    loadUser()
     // eslint-disable-next-line
-  })
+  }, [])
 
   //  useEffect(() => {
   //    setLoading(true)
