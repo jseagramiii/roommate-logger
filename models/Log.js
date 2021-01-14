@@ -16,10 +16,6 @@ const LogSchema = mongoose.Schema({
   content: {
     type: String,
   },
-  category: {
-    type: String,
-    default: 'general',
-  },
   completed: {
     type: Boolean,
     default: false,

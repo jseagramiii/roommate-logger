@@ -4,7 +4,7 @@ import LogContext from '../../context/log/logContext'
 
 const EditLogModal = () => {
   const logContext = useContext(LogContext)
-  const { current, clearCurrent } = logContext
+  const { current, clearCurrent, updateLog } = logContext
 
   useEffect(() => {
     if (current !== null) {
@@ -14,6 +14,7 @@ const EditLogModal = () => {
         name: '',
         header: '',
         content: '',
+        //completed: false,
       })
     }
   }, [current, logContext])
@@ -22,21 +23,23 @@ const EditLogModal = () => {
     name: '',
     header: '',
     content: '',
+    completed: false,
   })
 
-  const { name, header, content, completed } = log
+  const { id, name, header, content, completed } = log
 
   const onSubmit = () => {
-    console.log(name, header, content, completed)
     if (content === '' || name === '') {
-      M.toast({ html: 'Please enter a name and header' })
+      M.toast({ html: 'Please enter a header, details, and name' })
     } else {
-      console.log(name, header, completed)
-      setLog({
-        name: '',
-        header: '',
-        content: '',
-      })
+      const updLog = {
+        id: current._id,
+        name,
+        header,
+        content,
+        completed: completed,
+      }
+      updateLog(updLog)
     }
   }
 
@@ -92,7 +95,7 @@ const EditLogModal = () => {
             </select>
           </div>
         </div>
-        {/* <div className='row'>
+        <div className='row'>
           <div className='input-field'>
             <p>
               <label>
@@ -101,12 +104,13 @@ const EditLogModal = () => {
                   className='filled-in'
                   checked={completed}
                   value={completed}
-                  onChange={(e) => setCompleted(!completed)}
+                  onChange={(e) => setLog({ ...log, completed: !completed })}
                 />
+                <span>completed</span>
               </label>
             </p>
           </div>
-        </div> */}
+        </div>
       </div>
       <div className='modal-footer'>
         <a

@@ -1,56 +1,92 @@
 import React, { useReducer } from 'react'
-import { v4 as uuid } from 'uuid'
-import logContext from './logContext'
+import LogContext from './logContext'
 import logReducer from './logReducer'
+import axios from 'axios'
 import {
+  GET_LOGS,
   ADD_LOG,
   DELETE_LOG,
   SET_CURRENT,
   CLEAR_CURRENT,
+  CLEAR_LOGS,
   UPDATE_LOG,
-  FILTER_LOG,
-  CLEAR_FILTER,
+  LOG_ERROR,
 } from '../types'
-import LogContext from './logContext'
 
 const LogState = (props) => {
   const initialState = {
-    logs: [
-      {
-        id: 1,
-        name: 'jimmy',
-        header: 'hello guys.  Header',
-        content: 'hi hi how ya doing this is state. jimmy Content',
-        completed: true,
-      },
-      {
-        id: 2,
-        name: 'emily',
-        header: 'hello guys. Emily Header',
-        content: 'hi hi how ya doing this is state.  Emil Content',
-        completed: false,
-      },
-      {
-        id: 3,
-        name: 'Tony',
-        header: 'hello guys. Tony Header',
-        content: 'hi hi how ya doing this is state.  Tony Content',
-        completed: true,
-      },
-    ],
+    logs: null,
     current: null,
+    error: null,
   }
   const [state, dispatch] = useReducer(logReducer, initialState)
 
   // Add log
-  const addLog = (log) => {
-    log.id = Math.floor(Math.random() * 99999)
-    dispatch({ type: ADD_LOG, payload: log })
+  const addLog = async (log) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.post('/api/log', log, config)
+      dispatch({ type: ADD_LOG, payload: res.data })
+    } catch (error) {
+      dispatch({ type: LOG_ERROR, payload: error.response.message })
+    }
+  }
+
+  // Get logs
+  const getLogs = async () => {
+    try {
+      const res = await axios.get('/api/log')
+      dispatch({
+        type: GET_LOGS,
+        payload: res.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: LOG_ERROR,
+        payload: error.response.message,
+      })
+    }
+  }
+
+  // Update log
+  const updateLog = async (log) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    try {
+      const res = await axios.put(`/api/log/${log.id}`, log, config)
+      dispatch({
+        type: UPDATE_LOG,
+        payload: res.data,
+      })
+    } catch (error) {
+      dispatch({
+        type: LOG_ERROR,
+        payload: error.response.message,
+      })
+    }
   }
 
   // Delete log
-  const deleteLog = (id) => {
-    dispatch({ type: DELETE_LOG, payload: id })
+  const deleteLog = async (id) => {
+    try {
+      const res = await axios.delete(`/api/log/${id}`)
+      dispatch({
+        type: DELETE_LOG,
+        payload: id,
+      })
+    } catch (error) {
+      dispatch({
+        type: LOG_ERROR,
+        payload: error.response.message,
+      })
+    }
   }
 
   // Set current log
@@ -62,21 +98,19 @@ const LogState = (props) => {
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT })
   }
-  // Update log
-
-  // Filter logs
-
-  // Clear filter
 
   return (
     <LogContext.Provider
       value={{
         current: state.current,
         logs: state.logs,
+        error: state.error,
+        getLogs,
         addLog,
         deleteLog,
         setCurrent,
         clearCurrent,
+        updateLog,
       }}
     >
       {props.children}

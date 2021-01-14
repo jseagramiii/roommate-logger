@@ -4,6 +4,7 @@ import LogContext from '../../context/log/logContext'
 
 const AddLogModal = () => {
   const logContext = useContext(LogContext)
+  const { addLog } = logContext
 
   const [log, setLog] = useState({
     name: '',
@@ -18,14 +19,12 @@ const AddLogModal = () => {
     setLog({ ...log, [e.target.name]: e.target.value })
   }
 
-  const onSubmit = () => {
-    console.log(name, header, content, completed)
-
+  const onSubmit = (e) => {
+    e.preventDefault()
     if (content === '' || name === '') {
       M.toast({ html: 'Please enter a name and header' })
     } else {
-      logContext.addLog(log)
-      console.log(name, header, completed)
+      addLog(log)
       setLog({
         name: '',
         header: '',
@@ -33,6 +32,7 @@ const AddLogModal = () => {
         completed: false,
       })
     }
+    console.log(log)
   }
   return (
     <div id='add-log-modal' className='modal' style={modalStyle}>
@@ -82,7 +82,7 @@ const AddLogModal = () => {
             </select>
           </div>
         </div>
-        {/* <div className='row'>
+        <div className='row'>
           <div className='input-field'>
             <p>
               <label>
@@ -91,13 +91,13 @@ const AddLogModal = () => {
                   className='filled-in'
                   checked={completed}
                   value={completed}
-                  onChange={(e) => setLog(!completed)}
+                  onChange={(e) => setLog({ ...log, completed: !completed })}
                 />
                 <span>completed</span>
               </label>
             </p>
           </div>
-        </div> */}
+        </div>
       </div>
       <div className='modal-footer'>
         <a

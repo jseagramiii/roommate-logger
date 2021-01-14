@@ -6,8 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   CLEAR_ERRORS,
+  LOGIN_FAIL,
 } from '../types'
-
+const myStorage = window.localStorage
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   switch (action.type) {
@@ -19,8 +20,8 @@ export default (state, action) => {
         user: action.payload,
       }
     case REGISTER_SUCCESS:
-    case AUTH_ERROR:
-      localStorage.setItem('token', action.payload.token)
+    case LOGIN_SUCCESS:
+      myStorage.setItem('token', action.payload.token)
       return {
         ...state,
         ...action.payload,
@@ -28,7 +29,10 @@ export default (state, action) => {
         loading: false,
       }
     case REGISTER_FAIL:
-      localStorage.removeItem('token')
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case LOGOUT:
+      myStorage.removeItem('token')
       return {
         ...state,
         token: null,

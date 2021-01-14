@@ -42,8 +42,7 @@ router.post(
         name,
         header,
         content,
-        category,
-        completed,
+        //completed,
         date,
         user: req.user.id,
       })
@@ -92,7 +91,7 @@ router.put('/:id', auth, async (req, res) => {
 // @access   public
 router.delete('/:id', auth, async (req, res) => {
   try {
-    let log = await Log.findById(req.params.id)
+    const log = await Log.findById(req.params.id)
     if (!log) return res.status(404).json({ message: 'log not found' })
     // Logged in user can delete log entries
     if (log.user.toString() !== req.user.id) {

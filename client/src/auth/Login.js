@@ -1,18 +1,33 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import AlertContext from '../context/alert/alertContext'
+import AuthContext from '../context/auth/authContext'
 import M from 'materialize-css/dist/js/materialize.min.js'
 
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   })
 
   const alertContext = useContext(AlertContext)
+  const authContext = useContext(AuthContext)
 
   const { setAlert } = alertContext
+  const { login, error, clearErrors, isAuthenticated } = authContext
 
   const { email, password } = user
+
+  useEffect(() => {
+    M.AutoInit()
+    if (isAuthenticated) {
+      props.history.push('/')
+    }
+    if (error === 'invalid credentials') {
+      setAlert(M.toast({ html: `${error}` }))
+      clearErrors()
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history])
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value })
@@ -22,8 +37,12 @@ const Login = () => {
     e.preventDefault()
     if (email === '' || password === '') {
       setAlert(M.toast({ html: 'Please fill out all fields' }))
+    } else {
+      login({
+        email,
+        password,
+      })
     }
-    console.log('Login')
   }
 
   return (
