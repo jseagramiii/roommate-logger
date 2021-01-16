@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from 'react'
 import LogList from './housefeed/LogList'
 import AddButton from '../layout/AddButton'
 import AddLogModal from './housefeed/AddLogModal'
-import AddNameModal from './housefeed/AddNameModal'
+import AddTenantModal from './housefeed/AddTenantModal'
 import EditLogModal from './housefeed/EditLogModal'
-import NameListModal from './housefeed/NameListModal'
+import TenantListModal from './housefeed/TenantListModal'
 import AuthContext from '../context/auth/authContext'
 
 const Home = () => {
@@ -19,9 +19,9 @@ const Home = () => {
       <LogList />
       <AddButton />
       <AddLogModal />
-      <AddNameModal />
+      <AddTenantModal />
       <EditLogModal />
-      <NameListModal />
+      <TenantListModal />
     </div>
   )
 }

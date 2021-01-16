@@ -10,7 +10,7 @@ const AddLogModal = () => {
     name: '',
     header: '',
     content: '',
-    completed: false,
+    completed: 'Not Completed',
   })
 
   const { name, header, content, completed } = log
@@ -29,10 +29,9 @@ const AddLogModal = () => {
         name: '',
         header: '',
         content: '',
-        completed: false,
+        completed: 'Not Completed',
       })
     }
-    console.log(log)
   }
   return (
     <div id='add-log-modal' className='modal' style={modalStyle}>
@@ -77,8 +76,6 @@ const AddLogModal = () => {
               </option>
               <option value='John Smith'>John Smith</option>
               <option value='John Doe'>John Doe</option>
-              <option value='John Jones'>John Jones</option>
-              <option value='John Johnson'>John Johnson</option>
             </select>
           </div>
         </div>
@@ -87,13 +84,25 @@ const AddLogModal = () => {
             <p>
               <label>
                 <input
-                  type='checkbox'
-                  className='filled-in'
-                  checked={completed}
-                  value={completed}
-                  onChange={(e) => setLog({ ...log, completed: !completed })}
+                  type='radio'
+                  name={completed}
+                  checked={completed === 'Completed'}
+                  value='Completed'
+                  onChange={onChange}
                 />
-                <span>completed</span>
+                <span>Completed </span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input
+                  type='radio'
+                  name={completed}
+                  checked={completed === 'Not Completed'}
+                  value='Not Completed'
+                  onChange={onChange}
+                />
+                <span>Not Completed</span>
               </label>
             </p>
           </div>

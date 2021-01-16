@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NameItem = ({ name }) => {
+const TenantItem = ({ name }) => {
   const { firstName, lastName } = name
   return (
     <li className='collection-item'>
@@ -14,4 +14,4 @@ const NameItem = ({ name }) => {
   )
 }
 
-export default NameItem
+export default TenantItem

@@ -17,8 +17,8 @@ const LogSchema = mongoose.Schema({
     type: String,
   },
   completed: {
-    type: Boolean,
-    default: false,
+    type: String,
+    default: 'Not Completed',
   },
   date: {
     type: Date,

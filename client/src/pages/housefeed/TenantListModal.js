@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import LogContext from '../../context/log/logContext'
-import NameItem from './NameItem'
+import TenantItem from './TenantItem'
 
-const NameListModal = () => {
+const TenantListModal = () => {
   //  const [names, setNames] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -36,7 +36,7 @@ const NameListModal = () => {
         <h4>List of Current House Members</h4>
         <ul className='collection'>
           {names.map((name) => {
-            return <NameItem name={name} key={name.id} />
+            return <TenantItem name={name} key={name.id} />
           })}
         </ul>
       </div>
@@ -44,4 +44,4 @@ const NameListModal = () => {
   )
 }
 
-export default NameListModal
+export default TenantListModal

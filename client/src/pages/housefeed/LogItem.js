@@ -21,8 +21,23 @@ const LogItem = ({ log }) => {
   return (
     <li className='collection-item'>
       <div>
-        <h5>{header}</h5>
-        <p className={`${completed ? 'green-text' : 'red-text'}`}>{content}</p>
+        <h5
+          className={`${completed === 'Completed' ? 'green-text' : 'red-text'}`}
+        >
+          {header}
+          <span style={{ marginRight: '1em' }} className='secondary-content'>
+            <i
+              className={`material-icons small ${
+                completed === 'Completed' ? 'green-text' : 'red-text'
+              }`}
+            >
+              {`${completed === 'Completed' ? 'check' : 'clear'}`}
+            </i>
+          </span>
+        </h5>
+
+        <h6>{content}</h6>
+
         <span className='grey-text'>
           Created by: <span className='black-text'>{name} </span>
           on <Moment format='MMMM Do YYYY, h:mm:ss a'>{date}</Moment>
@@ -30,7 +45,7 @@ const LogItem = ({ log }) => {
         <a href='#!'>
           <i
             onClick={onDelete}
-            className='material-icons secondary-content grey-text'
+            className='material-icons small secondary-content grey-text'
           >
             delete
           </i>
@@ -41,7 +56,7 @@ const LogItem = ({ log }) => {
           onClick={handleClick}
           className='modal-trigger secondary-content'
         >
-          <i className='material-icons grey-text'>edit</i>
+          <i className='material-icons small grey-text'>edit</i>
         </a>
       </div>
     </li>

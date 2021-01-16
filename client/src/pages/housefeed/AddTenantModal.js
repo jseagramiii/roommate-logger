@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import LogContext from '../../context/log/logContext'
 
-const AddNameModal = () => {
+const AddTenantModal = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+
+  const logContext = useContext(LogContext)
+
+  const { addLog } = logContext
+
+  const [log, setLog] = useState({
+    name: '',
+    header: '',
+    content: '',
+    completed: 'Not Completed',
+  })
 
   const onSubmit = () => {
     if (firstName === '' || lastName === '') {
       M.toast({ html: 'Please enter a name' })
     } else {
       console.log(firstName, lastName)
+      addLog()
       setFirstName('')
       setLastName('')
     }
@@ -62,4 +75,4 @@ const modalStyle = {
   height: '75%',
 }
 
-export default AddNameModal
+export default AddTenantModal

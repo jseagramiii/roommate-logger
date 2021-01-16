@@ -5,13 +5,14 @@ const { check, validationResult } = require('express-validator')
 
 const User = require('../models/User')
 const Log = require('../models/Log')
+const Tenant = require('../models/Tenant')
 
-// @route    GET api/log
-// @desc     get roommate logs for logged in user
+// @route    GET api/tenant
+// @desc     get tenants for logged in user
 // @access   private
 router.get('/', auth, async (req, res) => {
   try {
-    const log = await Log.find({ user: req.user.id }).sort({ date: -1 })
+    const tenant = await Tenant.find({ user: req.user.id }).sort({ date: -1 })
     res.json(log)
   } catch (error) {
     console.error(error.message)
@@ -62,12 +63,9 @@ router.put('/:id', auth, async (req, res) => {
   const { name, header, content, completed, date } = req.body
 
   // Build log object
-  const logFields = {}
-  if (name) logFields.name = name
-  if (header) logFields.header = header
-  if (content) logFields.content = content
-  if (completed) logFields.completed = completed
-  if (date) logFields.date = date
+  const tenantFields = {}
+  if (name) tenantFields.firstName = firstName
+  if (header) tenantFields.lastName = lastName
 
   try {
     let log = await Log.findById(req.params.id)

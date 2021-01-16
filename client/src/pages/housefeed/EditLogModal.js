@@ -14,7 +14,7 @@ const EditLogModal = () => {
         name: '',
         header: '',
         content: '',
-        //completed: false,
+        completed: 'Not Completed',
       })
     }
   }, [current, logContext])
@@ -23,7 +23,7 @@ const EditLogModal = () => {
     name: '',
     header: '',
     content: '',
-    completed: false,
+    completed: 'Not Completed',
   })
 
   const { id, name, header, content, completed } = log
@@ -37,7 +37,7 @@ const EditLogModal = () => {
         name,
         header,
         content,
-        completed: completed,
+        completed,
       }
       updateLog(updLog)
     }
@@ -100,13 +100,25 @@ const EditLogModal = () => {
             <p>
               <label>
                 <input
-                  type='checkbox'
-                  className='filled-in'
-                  checked={completed}
-                  value={completed}
-                  onChange={(e) => setLog({ ...log, completed: !completed })}
+                  type='radio'
+                  name={completed}
+                  checked={completed === 'Completed'}
+                  value='Completed'
+                  onChange={onChange}
                 />
-                <span>completed</span>
+                <span>Completed </span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input
+                  type='radio'
+                  name={completed}
+                  checked={completed === 'Not Completed'}
+                  value='Not Completed'
+                  onChange={onChange}
+                />
+                <span>Not Completed</span>
               </label>
             </p>
           </div>
