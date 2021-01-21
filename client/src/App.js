@@ -12,6 +12,7 @@ import Alerts from './layout/Alerts'
 import Home from './pages/Home'
 import PrivateRoute from './routing/PrivateRoute'
 import LogState from './context/log/LogState'
+import TenantState from './context/tenant/TenantState'
 import AuthState from './context/auth/AuthState'
 import AlertState from './context/alert/AlertState'
 import setAuthToken from './utilities/setAuthToken'
@@ -30,21 +31,23 @@ const App = () => {
   return (
     <AuthState>
       <LogState>
-        <AlertState>
-          <Router>
-            <Navbar />
-            <div className='container'>
-              <Alerts />
-              <Switch>
-                <PrivateRoute exact path='/' component={Home} />
-                <PrivateRoute exact path='/calendar' component={Calendar} />
-                <PrivateRoute exact path='/expenses' component={Expense} />
-                <Route exact path='/register' component={Register} />
-                <Route exact path='/login' component={Login} />
-              </Switch>
-            </div>
-          </Router>
-        </AlertState>
+        <TenantState>
+          <AlertState>
+            <Router>
+              <Navbar />
+              <div className='container'>
+                <Alerts />
+                <Switch>
+                  <PrivateRoute exact path='/' component={Home} />
+                  <PrivateRoute exact path='/calendar' component={Calendar} />
+                  <PrivateRoute exact path='/expenses' component={Expense} />
+                  <Route exact path='/register' component={Register} />
+                  <Route exact path='/login' component={Login} />
+                </Switch>
+              </div>
+            </Router>
+          </AlertState>
+        </TenantState>
       </LogState>
     </AuthState>
   )

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import LogContext from '../../context/log/logContext'
 import LogItem from './LogItem'
 import M from 'materialize-css/dist/js/materialize.min.js'

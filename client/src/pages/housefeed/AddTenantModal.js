@@ -1,30 +1,33 @@
 import React, { useState, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import LogContext from '../../context/log/logContext'
+import TenantContext from '../../context/tenant/tenantContext'
 
 const AddTenantModal = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const tenantContext = useContext(TenantContext)
+  const { addTenant } = tenantContext
 
-  const logContext = useContext(LogContext)
-
-  const { addLog } = logContext
-
-  const [log, setLog] = useState({
-    name: '',
-    header: '',
-    content: '',
-    completed: 'Not Completed',
+  const [tenant, setTenant] = useState({
+    firstName: '',
+    lastName: '',
   })
+
+  const { firstName, lastName } = tenant
+
+  const onChange = (e) => {
+    setTenant({ ...tenant, [e.target.name]: e.target.value })
+  }
 
   const onSubmit = () => {
     if (firstName === '' || lastName === '') {
-      M.toast({ html: 'Please enter a name' })
+      M.toast({ html: 'Please enter a first and last name' })
     } else {
       console.log(firstName, lastName)
-      addLog()
-      setFirstName('')
-      setLastName('')
+      addTenant(tenant)
+      setTenant({
+        firstName: '',
+        lastName: '',
+      })
     }
   }
   return (
@@ -37,7 +40,7 @@ const AddTenantModal = () => {
               type='text'
               name='firstName'
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor='firstName' className='active'>
               First Name
@@ -50,7 +53,7 @@ const AddTenantModal = () => {
               type='text'
               name='lastName'
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor='lastName' className='active'>
               Last Name

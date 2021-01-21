@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
 import Moment from 'react-moment'
 import LogContext from '../../context/log/logContext'
+import TenantContext from '../../context/tenant/tenantContext'
 
 const LogItem = ({ log }) => {
   const logContext = useContext(LogContext)
-  const { deleteLog, current, setCurrent, clearCurrent } = logContext
+  const { deleteLog, setCurrent, clearCurrent } = logContext
+  const { _id, name, header, content, completed, date } = log
 
-  const { _id, name, header, content, category, completed, date } = log
+  const tenantContext = useContext(TenantContext)
+  const { tenants } = tenantContext
 
   const onDelete = () => {
     deleteLog(_id)

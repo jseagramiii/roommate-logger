@@ -12,13 +12,16 @@ const Calendar = () => {
   const [focused, setFocused] = useState(null)
 
   return (
-    <SingleDatePicker
-      date={date}
-      onDateChange={(date) => setDate({ date })}
-      focused={focused}
-      onFocusChange={({ focused }) => setFocused({ focused })} //
-      id='your_unique_id'
-    />
+    <div>
+      <h3>This page is a work in progress</h3>
+      <SingleDatePicker
+        date={date}
+        onDateChange={(date) => setDate({ date })}
+        focused={focused}
+        onFocusChange={({ focused }) => setFocused({ focused })} //
+        id='your_unique_id'
+      />
+    </div>
   )
 }
 

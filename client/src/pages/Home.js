@@ -6,6 +6,7 @@ import AddTenantModal from './housefeed/AddTenantModal'
 import EditLogModal from './housefeed/EditLogModal'
 import TenantListModal from './housefeed/TenantListModal'
 import AuthContext from '../context/auth/authContext'
+import TenantContext from '../context/tenant/tenantContext'
 
 const Home = () => {
   const authContext = useContext(AuthContext)

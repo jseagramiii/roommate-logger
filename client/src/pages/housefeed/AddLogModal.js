@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import LogContext from '../../context/log/logContext'
+import TenantContext from '../../context/tenant/tenantContext'
 
 const AddLogModal = () => {
   const logContext = useContext(LogContext)
   const { addLog } = logContext
+
+  const tenantContext = useContext(TenantContext)
+  const { tenants } = tenantContext
 
   const [log, setLog] = useState({
     name: '',

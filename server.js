@@ -20,6 +20,7 @@ app.get('/', (req, res) => res.status(200).json({ message: 'welcome' }))
 app.use('/api/users', require('./routes/users'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/log', require('./routes/log'))
+app.use('/api/tenant', require('./routes/tenant'))
 
 // Listener
 app.listen(PORT, () => console.log(`listening on port ${PORT}`))

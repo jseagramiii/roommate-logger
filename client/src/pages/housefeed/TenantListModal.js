@@ -1,45 +1,40 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
-import LogContext from '../../context/log/logContext'
+import M from 'materialize-css/dist/js/materialize.min.js'
+import TenantContext from '../../context/tenant/tenantContext'
 import TenantItem from './TenantItem'
+import Loader from '../../layout/Loader'
 
 const TenantListModal = () => {
-  //  const [names, setNames] = useState([])
-  const [loading, setLoading] = useState(false)
+  const tenantContext = useContext(TenantContext)
+  const { tenants, tenant, loading, getTenants } = tenantContext
 
-  //  useEffect(() => {
-  //    getNames()
-  //    // eslint-disable-next-line
-  //  }, [])
-
-  //  const getNames = async () => {
-  //    setLoading(true)
-  //  }
-  const names = [
-    {
-      firstName: 'James',
-      lastName: 'Seagram',
-    },
-    {
-      firstName: 'Nick',
-      lastName: 'Cage',
-    },
-    {
-      firstName: 'Emily',
-      lastName: 'Victoria',
-    },
-  ]
+  useEffect(() => {
+    M.AutoInit()
+    console.log('get tenants')
+    getTenants()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div id='name-list-modal' className='modal'>
-      <div className='modal-content'>
-        <h4>List of Current House Members</h4>
-        <ul className='collection'>
-          {names.map((name) => {
-            return <TenantItem name={name} key={name.id} />
-          })}
-        </ul>
-      </div>
+      {tenants !== null && !loading ? (
+        <div className='modal-content'>
+          <h4>List of Current House Members</h4>
+          <ul className='collection'>
+            {tenants.length === 0 ? (
+              <p className='center'>
+                <em>No tenants listed</em>
+              </p>
+            ) : (
+              tenants.map((tenant) => {
+                return <TenantItem tenant={tenant} key={tenant._id} />
+              })
+            )}
+          </ul>
+        </div>
+      ) : (
+        <Loader />
+      )}
     </div>
   )
 }
