@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import TenantContext from '../../context/tenant/tenantContext'
+import TenantContext from '../../../context/tenant/tenantContext'
 
 const TenantItem = ({ tenant }) => {
   const tenantContext = useContext(TenantContext)

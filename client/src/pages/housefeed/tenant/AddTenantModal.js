@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import LogContext from '../../context/log/logContext'
-import TenantContext from '../../context/tenant/tenantContext'
+import LogContext from '../../../context/log/logContext'
+import TenantContext from '../../../context/tenant/tenantContext'
 
 const AddTenantModal = () => {
   const tenantContext = useContext(TenantContext)

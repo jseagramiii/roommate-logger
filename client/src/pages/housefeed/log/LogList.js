@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import LogContext from '../../context/log/logContext'
+import LogContext from '../../../context/log/logContext'
 import LogItem from './LogItem'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import Loader from '../../layout/Loader'
+import Loader from '../../../layout/Loader'
 
 const LogList = () => {
   const logContext = useContext(LogContext)

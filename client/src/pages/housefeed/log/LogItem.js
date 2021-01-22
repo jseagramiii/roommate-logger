@@ -1,15 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Moment from 'react-moment'
-import LogContext from '../../context/log/logContext'
-import TenantContext from '../../context/tenant/tenantContext'
+import LogContext from '../../../context/log/logContext'
 
 const LogItem = ({ log }) => {
   const logContext = useContext(LogContext)
   const { deleteLog, setCurrent, clearCurrent } = logContext
   const { _id, name, header, content, completed, date } = log
-
-  const tenantContext = useContext(TenantContext)
-  const { tenants } = tenantContext
 
   const onDelete = () => {
     deleteLog(_id)
@@ -24,17 +20,15 @@ const LogItem = ({ log }) => {
   return (
     <li className='collection-item'>
       <div>
-        <h5
-          className={`${completed === 'Completed' ? 'green-text' : 'red-text'}`}
-        >
+        <h5 className={`${completed ? 'green-text' : 'red-text'}`}>
           {header}
           <span style={{ marginRight: '1em' }} className='secondary-content'>
             <i
               className={`material-icons small ${
-                completed === 'Completed' ? 'green-text' : 'red-text'
+                completed ? 'green-text' : 'red-text'
               }`}
             >
-              {`${completed === 'Completed' ? 'check' : 'clear'}`}
+              {`${completed ? 'check' : 'clear'}`}
             </i>
           </span>
         </h5>

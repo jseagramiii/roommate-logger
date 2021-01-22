@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://admin:iTAw1W5orjFaSCz7@cluster0.rkovu.mongodb.net/roommateloggerdb?retryWrites=true&w=majority",
+    "jwtSecret": "secret"
+}

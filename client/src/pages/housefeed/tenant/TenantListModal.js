@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import TenantContext from '../../context/tenant/tenantContext'
+import TenantContext from '../../../context/tenant/tenantContext'
 import TenantItem from './TenantItem'
-import Loader from '../../layout/Loader'
+import Loader from '../../../layout/Loader'
 
 const TenantListModal = () => {
   const tenantContext = useContext(TenantContext)
-  const { tenants, tenant, loading, getTenants } = tenantContext
+  const { tenants, loading, getTenants } = tenantContext
 
   useEffect(() => {
     M.AutoInit()

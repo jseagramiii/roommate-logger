@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import LogContext from '../../context/log/logContext'
-import TenantContext from '../../context/tenant/tenantContext'
+import LogContext from '../../../context/log/logContext'
+import TenantContext from '../../../context/tenant/tenantContext'
+import TenantSelect from '../tenant/TenantSelect'
 
 const AddLogModal = () => {
   const logContext = useContext(LogContext)
@@ -14,7 +15,7 @@ const AddLogModal = () => {
     name: '',
     header: '',
     content: '',
-    completed: 'Not Completed',
+    completed: false,
   })
 
   const { name, header, content, completed } = log
@@ -29,11 +30,12 @@ const AddLogModal = () => {
       M.toast({ html: 'Please enter a name and header' })
     } else {
       addLog(log)
+      console.log(log)
       setLog({
         name: '',
         header: '',
         content: '',
-        completed: 'Not Completed',
+        completed: null,
       })
     }
   }
@@ -78,8 +80,7 @@ const AddLogModal = () => {
               <option value='' disabled>
                 Select House Member
               </option>
-              <option value='John Smith'>John Smith</option>
-              <option value='John Doe'>John Doe</option>
+              <TenantSelect />
             </select>
           </div>
         </div>
@@ -88,25 +89,13 @@ const AddLogModal = () => {
             <p>
               <label>
                 <input
-                  type='radio'
-                  name={completed}
-                  checked={completed === 'Completed'}
-                  value='Completed'
-                  onChange={onChange}
+                  type='checkbox'
+                  className='filled-in'
+                  checked={completed}
+                  value={completed}
+                  onChange={(e) => setLog({ ...log, completed: !completed })}
                 />
-                <span>Completed </span>
-              </label>
-            </p>
-            <p>
-              <label>
-                <input
-                  type='radio'
-                  name={completed}
-                  checked={completed === 'Not Completed'}
-                  value='Not Completed'
-                  onChange={onChange}
-                />
-                <span>Not Completed</span>
+                <span>Completed</span>
               </label>
             </p>
           </div>
