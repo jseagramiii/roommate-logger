@@ -16,7 +16,7 @@ const LogList = () => {
   if (logs !== null && logs.length === 0 && !loading) {
     return (
       <h3 className='cellection-header'>
-        Welcome! Please add a log using the button below
+        Welcome! Start by adding house members using the green button below.
       </h3>
     )
   }

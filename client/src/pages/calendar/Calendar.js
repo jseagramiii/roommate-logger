@@ -18,8 +18,9 @@ const Calendar = () => {
         date={date}
         onDateChange={(date) => setDate({ date })}
         focused={focused}
-        onFocusChange={({ focused }) => setFocused({ focused })} //
+        onFocusChange={({ focused }) => setFocused({ focused })}
         id='your_unique_id'
+        disabled
       />
     </div>
   )
