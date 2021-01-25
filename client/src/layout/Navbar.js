@@ -17,7 +17,7 @@ const Navbar = () => {
         <li>Hello, {user && user.name}</li>
         <li>
           <a href='#!' onClick={handleLogout}>
-            logout
+            Logout
           </a>
         </li>
         <li>
